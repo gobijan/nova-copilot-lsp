@@ -1,0 +1,24 @@
+{
+    "identifier": "screenisland.novacopilotlsp",
+    "name": "Copilot for Nova",
+    "organization": "Screen Island",
+    "description": "Nova plugin for GitHub Copilot.",
+    "version": "1.0",
+    "categories": ["languages"],
+
+    "main": "main.js",
+
+    "entitlements": {
+        "process": true,
+        "filesystem": "readonly"
+    },
+
+    "config": [
+        {
+            "key": "screenisland.novacopilotlsp.node-path",
+            "title": "node path",
+            "type": "path",
+            "placeholder": "/opt/homebrew/bin/node"
+        }
+    ]
+}
