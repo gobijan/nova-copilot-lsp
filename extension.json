@@ -11,7 +11,7 @@
     "entitlements": {
         "process": true,
         "filesystem": "readonly",
-                "clipboard": true
+        "clipboard": true
     },
 
         "commands": {
