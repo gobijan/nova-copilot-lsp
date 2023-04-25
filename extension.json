@@ -10,8 +10,22 @@
 
     "entitlements": {
         "process": true,
-        "filesystem": "readonly"
+        "filesystem": "readonly",
+        "clipboard": true
     },
+
+        "commands": {
+            "extensions": [
+                {
+                    "title": "Sign In",
+                    "command": "screenisland.novacopilotlsp.signIn"
+                },
+                {
+                    "title": "Sign Out",
+                    "command": "screenisland.novacopilotlsp.signOut"
+                }
+            ]
+        },
 
     "config": [
         {
