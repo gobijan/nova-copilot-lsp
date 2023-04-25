@@ -17,7 +17,7 @@
 
 /// https://docs.nova.app/api-reference/assistants-registry/
 
-type AssistantsRegistrySelector = string | { syntax: string }
+type AssistantsRegistrySelector = string | string[] | { syntax: string }
 
 /** The `AssistantsRegistry` class is used to register and invoke assistants, which can provide specific extension functionality within the editor. A shared instance of the class is always available as the `nova.assistants` environment property. */
 interface AssistantsRegistry {
