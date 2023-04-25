@@ -1,5 +1,5 @@
 const { rangeToLspRange } = require("./helpers")
-/** @typedef {import("./LanguageServer")} LanguageServer */
+/** @typedef {import("./copilot/LanguageServer")} LanguageServer */
 
 /** @implements {CompletionAssistant} */
 class CompletionProvider {
@@ -16,16 +16,14 @@ class CompletionProvider {
     async provideCompletionItems(editor, context) {
         if (context.reason == CompletionReason.Character) return null
 
-        const suggestions = await this.suggestions(editor, context)
-        console.log("suggestions", JSON.stringify(suggestions))
+        const range = new Range(context.position, context.position)
+        const completion = await this.langserver.getCompletion(editor, range)
 
-        const firstCompletion = suggestions.completions[0]
-
-        if (firstCompletion) {
+        if (completion) {
             const item = new CompletionItem("Copilot", CompletionItemKind.Expression)
 
-            item.insertText = firstCompletion.text
-            item.documentation = firstCompletion.displayText
+            item.insertText = completion.text
+            item.documentation = completion.displayText
 
             return [item]
         }
@@ -37,13 +35,10 @@ class CompletionProvider {
      * @param {TextEditor} editor
      * @param {CompletionContext} context
      * @returns {Promise}
-     */
-    suggestions(editor, context) {
+     // */
+    completions(editor, context) {
         try {
             const position = rangeToLspRange(editor.document, new Range(context.position, context.position))
-
-            // console.log(JSON.stringify(position))
-
             const params = {
                 "doc": {
                     "source": editor.document.getTextInRange(new Range(0, editor.document.length)),
@@ -62,7 +57,7 @@ class CompletionProvider {
             }
             return this.langserver.languageClient.sendRequest("getCompletions", params)
         } catch (error) {
-            console.error(JSON.stringify(error))
+            console.error(error)
         }
     }
 }

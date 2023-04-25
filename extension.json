@@ -14,18 +14,25 @@
         "clipboard": true
     },
 
-        "commands": {
-            "extensions": [
-                {
-                    "title": "Sign In",
-                    "command": "screenisland.novacopilotlsp.signIn"
-                },
-                {
-                    "title": "Sign Out",
-                    "command": "screenisland.novacopilotlsp.signOut"
-                }
-            ]
-        },
+    "commands": {
+        "extensions": [
+            {
+                "title": "Sign In",
+                "command": "screenisland.novacopilotlsp.signIn"
+            },
+            {
+                "title": "Sign Out",
+                "command": "screenisland.novacopilotlsp.signOut"
+            }
+        ],
+        "editor": [
+            {
+                "title": "Apply Completion",
+                "command": "screenisland.novacopilotlsp.applyCompletion",
+                "shortcut": "cmd-opt-'"
+            }
+        ]
+    },
 
     "config": [
         {
