@@ -1,5 +1,17 @@
 const { AccountRequirement } = require("./support")
+const { rangeToLspRange } = require("../helpers")
 /** @typedef {import("./LanguageServer")} LanguageServer */
+/** @typedef {import("../types/Types").CopilotCompletion} CopilotCompletion */
+
+/**
+ * Ask Copilot to apply the first available completion
+ * @param {TextEditor} editor
+ * @param {LanguageServer} langserver
+ */
+exports.applyCompletionCommand = async (editor, langserver) => {
+    const completion = await langserver.getCompletion(editor)
+    if (completion) editor.insert(completion.displayText)
+}
 
 /**
  * Sign in to Github Copilot

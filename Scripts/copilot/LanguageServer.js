@@ -1,4 +1,6 @@
 const { AccountRequirement } = require("./support")
+const { rangeToLspRange } = require("../helpers")
+/** @typedef {import("../types/Types").CopilotCompletion} CopilotCompletion */
 
 class LanguageServer {
     constructor() {
@@ -51,13 +53,13 @@ class LanguageServer {
             this.languageClient = client
 
             this.languageClient.onNotification("statusNotification", (notification) => {
-                console.log(JSON.stringify(notification))
+                // console.log(JSON.stringify(notification))
             })
             this.languageClient.onNotification("PanelSolution", (notification) => {
-                console.log(JSON.stringify(notification))
+                // console.log(JSON.stringify(notification))
             })
             this.languageClient.onNotification("PanelSolutionsDone", (notification) => {
-                console.log(JSON.stringify(notification))
+                // console.log(JSON.stringify(notification))
             })
             this.languageClient.onNotification("LogMessage", (notification) => {
                 // console.log(JSON.stringify(notification))
@@ -120,13 +122,13 @@ class LanguageServer {
     /** @private @readonly */
     get editorInfo() {
         return {
-            "editorInfo": {
-                "name": "Nova",
-                "version": "10.6",
+            editorInfo: {
+                name: "Nova",
+                version: nova.versionString,
             },
-            "editorPluginInfo": {
-                "name": "Nova Copilot",
-                "version": "1.0",
+            editorPluginInfo: {
+                name: nova.extension.name,
+                version: nova.extension.version,
             },
         }
     }
@@ -174,6 +176,48 @@ class LanguageServer {
                 return !this.accountStatus.signedIn
             default:
                 return false
+        }
+    }
+
+    /**
+     * Ask Copilot for the first available completion
+     * @param {TextEditor} editor
+     * @param {?Range} range
+     * @returns {Promise<?CopilotCompletion>}
+     */
+    async getCompletion(editor, range=null) {
+        const completions = await this.getCompletions(editor, range)
+        return completions.completions[0] || null
+    }
+
+    /**
+     * Ask Copilot for available completions
+     * @param {TextEditor} editor
+     * @param {?Range} range
+     * @returns {Promise<Object>}
+     */
+    async getCompletions(editor, range=null) {
+        try {
+            const position = rangeToLspRange(editor.document, range || editor.selectedRange)
+            const params = {
+                "doc": {
+                    "source": editor.document.getTextInRange(new Range(0, editor.document.length)),
+                    "tabSize": editor.tabLength,
+                    "indentSize": 1, // there is no such concept in ST
+                    "insertSpaces": editor.softTabs,
+                    "path": editor.document.path,
+                    "uri": editor.document.uri,
+                    "relativePath": editor.document.path,
+                    "languageId": editor.document.syntax,
+                    "position": { "line": position.end.line + 1, "character": position.end.character + 1 },
+                    // Buffer Version. Generally this is handled by LSP, but we need to handle it here
+                    // Will need to test getting the version from LSP
+                    "version": 0,
+                }
+            }
+            return await this.languageClient.sendRequest("getCompletions", params)
+        } catch (error) {
+            console.error(error)
         }
     }
 }

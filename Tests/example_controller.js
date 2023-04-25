@@ -1,0 +1,1 @@
+// Initiliaze a stimulusJs controller
