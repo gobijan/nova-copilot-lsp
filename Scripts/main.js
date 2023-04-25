@@ -1,6 +1,6 @@
-const LanguageServer = require("./LanguageServer")
+const LanguageServer = require("./copilot/LanguageServer")
 const CompletionProvider = require("./CompletionProvider")
-const { signInCommand, signOutCommand } = require("./commands")
+const { signInCommand, signOutCommand } = require("./copilot/commands")
 
 /** @type {LanguageServer} */
 let langserver = null
@@ -24,13 +24,9 @@ exports.deactivate = function() {
 }
 
 nova.subscriptions.add(
-    nova.commands.register("screenisland.novacopilotlsp.signIn", () => {
-        signInCommand(langserver)
-    })
+    nova.commands.register("screenisland.novacopilotlsp.signIn", () => signInCommand(langserver))
 )
 
 nova.subscriptions.add(
-    nova.commands.register("screenisland.novacopilotlsp.signOut", () => {
-        signOutCommand(langserver)
-    })
+    nova.commands.register("screenisland.novacopilotlsp.signOut", () => signOutCommand(langserver))
 )

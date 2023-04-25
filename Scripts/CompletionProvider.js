@@ -1,5 +1,5 @@
 const { rangeToLspRange } = require("./helpers")
-/** @typedef {import("./LanguageServer")} LanguageServer */
+/** @typedef {import("./copilot/LanguageServer")} LanguageServer */
 
 /** @implements {CompletionAssistant} */
 class CompletionProvider {

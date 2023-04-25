@@ -1,12 +1,14 @@
+const { AccountRequirement } = require("./support")
+
 class LanguageServer {
     constructor() {
         /** @type {LanguageClient} */
         this.languageClient = null
 
         /** @type {boolean} */
-        this.hasSignedIn = false
+        this.signedIn = false
         /** @type {boolean} */
-        this.isAuthorized = false
+        this.authorized = false
 
         // Observe the configuration setting for the server's location, and restart the server on change
         nova.config.observe("screenisland.novacopilotlsp.node-path", function(path) {
@@ -92,16 +94,15 @@ class LanguageServer {
         }
     }
 
-    /** @private */
     async checkStatus() {
         try {
             const response = await this.languageClient.sendRequest("checkStatus", {})
 
             const status = response["status"]
-            const hasSignedIn = ["NotAuthorized", "OK"].includes(status) ? true : false
-            const isAuthorized = status == "OK" ? true : false
+            const signedIn = ["NotAuthorized", "OK"].includes(status) ? true : false
+            const authorized = status == "OK" ? true : false
 
-            this.setAccountStatus(hasSignedIn, isAuthorized)
+            this.accountStatus = { signedIn, authorized }
         } catch (error) {
             console.error(error)
         }
@@ -116,7 +117,7 @@ class LanguageServer {
         }
     }
 
-    /** @private */
+    /** @private @readonly */
     get editorInfo() {
         return {
             "editorInfo": {
@@ -131,20 +132,48 @@ class LanguageServer {
     }
 
     /**
-     * @private
-     * @param {?boolean} hasSignedIn
-     * @param {?boolean} isAuthorized
+     * Object representing the current account status.
+     * @type {{ signedIn: boolean, authorized: boolean }}
      */
-    setAccountStatus(hasSignedIn, isAuthorized) {
-        if (hasSignedIn) this.hasSignedIn = hasSignedIn
-        if (isAuthorized) this.isAuthorized = isAuthorized
+    get accountStatus() {
+        return {
+            signedIn: this.signedIn,
+            authorized: this.authorized
+        }
+    }
 
-        if (!this.hasSignedIn) {
+    /**
+     * Set the current account status.
+     * @param {{ signedIn: ?boolean, authorized: ?boolean }} newStatus
+     */
+    set accountStatus(newStatus) {
+        if (newStatus.signedIn != null) this.signedIn = newStatus.signedIn
+        if (newStatus.authorized != null) this.authorized = newStatus.authorized
+
+        if (!this.signedIn) {
             console.warn("Copilot: has NOT been signed in.")
-        } else if (!this.isAuthorized) {
+        } else if (!this.authorized) {
             console.warn("Copilot: has signed in but not authorized.")
         } else {
             console.log("Copilot: has been signed in and authorized")
+        }
+    }
+
+    /**
+     * Check if the current Account meets the specified requirement
+     * @param {AccountRequirement} requirement
+     * @returns {boolean}
+     */
+    accountMeetsRequirement(requirement) {
+        switch (requirement) {
+            case AccountRequirement.SignedIn:
+                return this.accountStatus.signedIn
+            case AccountRequirement.Authorized:
+                return this.accountStatus.authorized
+            case AccountRequirement.SignedOut:
+                return !this.accountStatus.signedIn
+            default:
+                return false
         }
     }
 }
