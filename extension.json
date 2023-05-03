@@ -4,16 +4,16 @@
     "organization": "Screen Island",
     "description": "Nova plugin for GitHub Copilot.",
     "version": "1.0",
-    "categories": ["languages"],
-
+    "categories": [
+        "languages"
+    ],
+    "bugs": "https://github.com/gobijan/nova-copilot-lsp/issues",
     "main": "main.js",
-
     "entitlements": {
         "process": true,
         "filesystem": "readonly",
         "clipboard": true
     },
-
     "commands": {
         "extensions": [
             {
@@ -24,16 +24,8 @@
                 "title": "Sign Out",
                 "command": "screenisland.novacopilotlsp.signOut"
             }
-        ],
-        "editor": [
-            {
-                "title": "Apply Completion",
-                "command": "screenisland.novacopilotlsp.applyCompletion",
-                "shortcut": "cmd-opt-'"
-            }
         ]
     },
-
     "config": [
         {
             "key": "screenisland.novacopilotlsp.node-path",
