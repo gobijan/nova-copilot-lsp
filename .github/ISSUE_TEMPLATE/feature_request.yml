@@ -1,0 +1,49 @@
+name: 🚀 Feature Request or Improvement
+description: Use to submit ideas for improved functionality or new features for the NOVA Github Copilot extension.
+title: "<Title of Feature Request>"
+labels: [🤔 Unrefined,🧚 Feature Request,🗳️ Feedback Needed]
+body:
+
+- type: textarea
+  attributes:
+    label: Problem
+    description: A concise description of what you're experiencing or what you want done.
+    placeholder: Currently, the extension settings are unclear, causing onboarding difficulty.
+  validations:
+    required: true
+
+- type: textarea
+  attributes:
+    label: Solution
+    description: Describe your proposed solution or approach for addressing the problem.
+    placeholder: Improve extension documentation & include more detail in extension package.
+  validations:
+   required: false
+
+- type: textarea
+  attributes:
+    label: Benefits
+    description: What benefits does your solution provide to users and what potential impact does it have on the extension?
+    placeholder: The proposed solution would improve onboarding, which could save users time and provide a more enjable developer experience.
+  validations:
+    required: true
+
+- type: textarea
+  attributes:
+    label: Acceptance Criteria
+    description: Define the criteria that the proposed feature or improvement should meet before it is considered complete.
+    placeholder:
+      \- [ ] Extension package descriptions improved
+      - [ ] Github docs improved
+      - [ ] Resources audited and updated as necessary
+  validations:
+    required: false
+
+- type: textarea
+  attributes:
+    label: Resources/Additional Info
+    description: Provide any relevant resources or additional information in order to support your proposal.
+    placeholder: \- [Building NOVA Extensions](https://docs.nova.app/extensions/)
+      - [NOVA Extension Manifest Docs](https://docs.nova.app/extensions/manifest/)
+  validations:
+    required: false
