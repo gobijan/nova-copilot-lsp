@@ -1,0 +1,36 @@
+name: 🛠️ Task
+description: Used to assign tasks or responsibilities to specific team members, such as code reviews, testing, or deployment.
+title: "<Title of Task>"
+labels: [🤔 Unrefined, 🛠️ Task]
+body:
+  - type: textarea
+    attributes:
+      label: Overview
+      description: A concise description of what needs to be done
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Background
+      description: A short history or background of what this task is or why it is being done.
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: References
+      description: Useful information or related issues/conversations
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: Acceptance Criteria
+      description: What needs to be completed for this to be considered done?
+      placeholder: |
+        "- [ ] First Thing"
+        "- [ ] Second Thing"
+        "- [ ] Third Thing"
+        "- [ ] Fourth Thing"
+    validations:
+      required: true
