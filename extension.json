@@ -3,7 +3,7 @@
     "name": "Copilot for Nova",
     "organization": "Screen Island",
     "description": "Nova plugin for GitHub Copilot.",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "categories": [
         "languages"
     ],

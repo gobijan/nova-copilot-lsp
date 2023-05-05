@@ -25,7 +25,6 @@ exports.rangeToLspRange = (document, range) => {
 
         chars += lineLength
     }
-
     return null
 }
 
