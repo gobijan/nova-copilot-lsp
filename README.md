@@ -57,3 +57,8 @@ You can also configure preferences on a per-project basis in **Project → Proje
 
 P.S. If you'd like, you can remove these comments before submitting your extension 😉
 -->
+
+Copilot Completions should be in the Completion Provider list.
+Additionally you can trigger them with `CMD+OPTION+'`.
+
+Have fun.
