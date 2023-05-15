@@ -14,7 +14,7 @@ Let's get started!
 
 **nova-copilot-lsp** aims to provide deep integration with **Github Copilot**, including the most important features.
 
-Right now it is not functional but the foundation is there by embedding a working copilot language server extracted from https://github.com/github/copilot.vim
+Right now it is partly functional but the foundation is there by embedding a working copilot language server extracted from https://github.com/github/copilot.vim
 
 
 ## Requirements
