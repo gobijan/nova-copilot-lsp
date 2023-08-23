@@ -16,6 +16,8 @@ Let's get started!
 
 Right now it is not functional but the foundation is there by embedding a working copilot language server extracted from https://github.com/github/copilot.vim
 
+https://github.com/features/copilot/
+https://github.com/github/copilot.vim
 
 ## Requirements
 
@@ -25,7 +27,7 @@ Right now it is not functional but the foundation is there by embedding a workin
 
 nova-copilot-lsp requires some additional tools to be installed on your Mac:
 
-- [Node.js 8.2.0](https://nodejs.org) and NPM 5.2.0 or newer
+-   [Node.js 8.2.0](https://nodejs.org) and NPM 5.2.0 or newer
 
 <!--
 ✨ Providing tips, tricks, or other guides for installing or configuring external dependencies can go a long way toward helping your users have a good setup experience:
@@ -40,7 +42,6 @@ nova-copilot-lsp requires some additional tools to be installed on your Mac:
 -->
 
 nova-copilot-lsp runs any time you open a local project with supported file extensions.
-
 
 ### Configuration
 
