@@ -8,6 +8,7 @@
         "languages"
     ],
     "bugs": "https://github.com/gobijan/nova-copilot-lsp/issues",
+    "repository": "https://github.com/gobijan/nova-copilot-lsp",
     "main": "main.js",
     "entitlements": {
         "process": true,
