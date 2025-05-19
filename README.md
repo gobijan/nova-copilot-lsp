@@ -12,7 +12,9 @@ Let's get started!
 🎈 Include a brief description of the features your extension provides. For example:
 -->
 
-**DEPRECATED: nova-copilot-lsp** aims to provide deep integration with **Github Copilot**, including the most important features.
+**DEPRECATED**: This extension is now deprectated. Use https://github.com/besya/nova-copilot 
+
+**nova-copilot-lsp** aims to provide deep integration with **Github Copilot**, including the most important features.
 
 Right now it is partly functional but the foundation is there by embedding a working copilot language server extracted from https://github.com/github/copilot.vim
 
